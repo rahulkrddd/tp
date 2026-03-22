@@ -1,0 +1,318 @@
+:root{
+  --bg:#0e1424;
+  --panel:#141c33;
+  --panel-2:#11182b;
+  --border:#243055;
+  --text:#e7ecfb;
+  --muted:#9aa7c7;
+  --accent:#6ea8fe;
+
+  --pos:#22c55e;
+  --neg:#ef4444;
+  --neu:#94a3b8;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #18224a, transparent),
+    linear-gradient(180deg, #0b1020, #070b14);
+  color:var(--text);
+}
+
+/* ================= TOP BAR ================= */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:16px 18px;
+  background:rgba(12,18,40,.9);
+  border-bottom:1px solid var(--border);
+  backdrop-filter: blur(10px);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+h1{ margin:0; font-size:18px; font-weight:600; }
+.sub{ margin-top:4px; font-size:12px; color:var(--muted); }
+
+.controls{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+select, button{
+  background:var(--panel);
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:8px 12px;
+  border-radius:10px;
+  font-size:13px;
+}
+
+button{ cursor:pointer; }
+button:hover{ border-color:var(--accent); }
+
+/* ================= WRAP ================= */
+.wrap{ padding:16px; }
+
+/* ================= TABLE WRAP (DESKTOP) ================= */
+.tableWrap{
+  background:linear-gradient(180deg, #131b34, #0f152a);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:auto;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+table{
+  border-collapse:separate;
+  border-spacing:0;
+  min-width:1100px;
+  width:100%;
+  font-size:13px;
+}
+
+th, td{
+  padding:10px 14px;
+  white-space:nowrap;
+}
+
+thead th{
+  position:sticky;
+  top:0;
+  background:#1a2342;
+  color:#eaf0ff;
+  font-weight:600;
+  border-bottom:1px solid var(--border);
+  text-align:center;
+  z-index:3;
+}
+
+th.indexCol,
+td.indexCol{
+  position:sticky;
+  left:0;
+  z-index:4;
+  background:#121a32;
+  font-weight:600;
+  border-right:1px solid var(--border);
+  min-width:240px;
+}
+
+tbody tr:hover{
+  background:rgba(110,168,254,.06);
+}
+
+tbody td{
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.num,
+.chg{
+  text-align:right;
+  font-variant-numeric: tabular-nums;
+}
+
+.pos{ color:var(--pos); font-weight:600; }
+.neg{ color:var(--neg); font-weight:600; }
+.neu{ color:var(--neu); font-weight:600; }
+
+.note{
+  margin-top:14px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* =================================================
+   📱 MOBILE APP VIEW (INDEX CARD + MINI TABLE)
+================================================= */
+@media (max-width: 768px){
+
+  /* ===== FIX TOP HEADER UX ===== */
+
+  .topbar{
+    padding:16px 14px;
+    gap:10px;
+  }
+
+  .topbar > div:first-child{
+    width:100%;
+  }
+
+  h1{
+    font-size:17px;
+    line-height:1.25;
+    margin-bottom:4px;
+  }
+
+  .sub{
+    font-size:12px;
+    line-height:1.35;
+    margin:0;
+    color:var(--muted);
+  }
+
+  /* break subtitle nicely */
+  .sub span#asof{
+    display:block;
+    margin-top:2px;
+  }
+
+
+  /* ===== FIX CONTROLS ALIGNMENT ===== */
+
+
+
+  /* === FORCE ONE-LINE CONTROLS === */
+  .controls{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    gap:8px;
+    width:100%;
+    margin-top:12px;
+  }
+
+  /* "Days:" label */
+  .controls label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    white-space:nowrap;
+  }
+
+  /* dropdown */
+  .controls select{
+    height:38px;
+    min-width:70px;
+    padding:0 8px;
+    font-size:12px;
+    border-radius:10px;
+  }
+
+  /* refresh button */
+  .controls button{
+    height:38px;
+    padding:0 14px;
+    font-size:12px;
+    border-radius:10px;
+    white-space:nowrap;
+  }
+}
+``
+
+  /* hard stop any horizontal scroll */
+  html, body { overflow-x: hidden; }
+
+  /* topbar stack */
+  .wrap{ padding:12px; }
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:14px 12px;
+  }
+  .controls{
+    width:100%;
+    justify-content:space-between;
+    margin-top:10px;
+  }
+  select, button{
+    width:48%;
+    padding:10px;
+    font-size:14px;
+  }
+
+  /* remove desktop table container scroll */
+  .tableWrap{
+    background:transparent;
+    border:none;
+    box-shadow:none;
+    overflow:visible;
+  }
+
+  /* IMPORTANT: override desktop nowrap + wide table */
+  table{ min-width: 0 !important; }
+  th, td{ white-space: normal !important; }   /* ✅ THIS fixes the right-shift */
+
+  /* table → cards */
+  table, thead, tbody, tr, th, td{
+    display:block;
+    width:100%;
+  }
+  thead{ display:none; }
+
+  /* each index becomes card */
+  tbody tr{
+    background:linear-gradient(180deg,#141c33,#0f152a);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:16px;
+    padding:12px;
+    margin-bottom:14px;
+    box-shadow:0 10px 26px rgba(0,0,0,.45);
+    overflow:hidden; /* ✅ prevents inner overflow */
+  }
+
+  td.indexCol{
+    position:static;
+    background:none;
+    border:none;
+    min-width:auto;
+    padding:0 0 10px;
+    margin:0 0 8px;
+    font-size:15px;
+    font-weight:650;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+
+
+
+  /* hide desktop change cell */
+  td.chg{ display:none; }
+
+  /* value row becomes the mini-table row */
+  td.num{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr 1fr; /* ✅ fits screen */
+    gap:8px;
+    align-items:center;
+    padding:7px 0;
+    font-size:12px;          /* ✅ smaller font */
+    line-height:1.2;
+    min-width:0;             /* ✅ allows shrinking */
+    text-align:right;
+  }
+
+  /* Date column */
+  td.num::before{
+    content: attr(data-date);
+    text-align:left;
+    font-size:12px;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;      /* ✅ date stays one line */
+  }
+
+  /* % Change column (from data-chg) */
+  td.num::after{
+    content: attr(data-chg);
+    font-size:11.5px;
+    min-width:0;
+    overflow-wrap:anywhere;  /* ✅ no overflow */
+    text-align:right;
+  }
+
+  /* color (mobile only) */
+  td.num[data-chg-class="pos"]{ color:var(--pos); font-weight:600; }
+  td.num[data-chg-class="neg"]{ color:var(--neg); font-weight:600; }
+  td.num[data-chg-class="neu"]{ color:var(--neu); font-weight:600; }
+}
+``
