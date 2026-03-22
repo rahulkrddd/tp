@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Energy Indices — Live Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Energy Indices Dashboard</h1>
+      <div class="sub">
+        Auto-updating last
+        <span id="daysLbl">6</span>
+        calendar days (weekends carry-forward).
+        <span id="asof">Loading…</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <label>
+        Days:
+        <select id="days">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </label>
+      <button id="refresh">Refresh</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tableWrap">
+      <table id="grid" aria-label="Energy indices table"></table>
+    </div>
+
+    <div class="note">
+      <strong>No blanks policy:</strong>
+      If a market is closed on a calendar day, the last available close is shown
+      (carried forward). Daily % change is calculated only on actual trading days.
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
