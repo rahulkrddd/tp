@@ -9,7 +9,7 @@ let refreshTimer = null;
 
 /* ===== Days cache config ===== */
 const DAYS_STORAGE_KEY = "energy_dashboard_days";
-const DEFAULT_DAYS = "3";
+const DEFAULT_DAYS = "4";
 
 /* ===== Helpers ===== */
 function clsForChange(txt) {
